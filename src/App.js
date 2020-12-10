@@ -1,10 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactDom from 'react';
+import Header from './components/Header'
 
-function App() {
+
+
+
+const App = () => {
+
+
   return (
-    <div className="App">
-      test
+    <div>
+        <Header/>
     </div>
   );
 }
