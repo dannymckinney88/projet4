@@ -1,0 +1,9 @@
+.hero-img{
+    background-image: url("https://cdn2.harryanddavid.com/wcsstore/HarryAndDavid/images/catalog/20_14267_30XP_04ex.jpg?width=545&height=400&quality=80&auto=webp&optimize={large}");
+    height: 400px;
+    
+    background-position: center;
+    background-repeat: no-repeat; 
+     background-size: cover;
+    /* position: relative; */
+}

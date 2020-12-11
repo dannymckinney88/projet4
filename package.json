@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@chec/commerce.js": "^2.3.0-beta2",
+    "@emotion/core": "^11.0.0",
+    "@emotion/styled": "^11.0.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.5.0",

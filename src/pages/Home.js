@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { commerce } from "../lib/commerce";
+import Hero from '../components/Hero'
 
 
 const Home = () => {
@@ -33,6 +34,7 @@ const Home = () => {
     return (
         <div>
             Home
+        <Hero/>
         </div>
     );
 }
