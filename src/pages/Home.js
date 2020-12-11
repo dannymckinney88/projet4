@@ -7,7 +7,7 @@ const Home = () => {
 
     const fetchProducts = () => {
         commerce.products
-          .list( {category_slug: 'Cookies'} )
+          .list( {category_slug: 'Featured'} )
           .then((products) => {
             console.log(products.data);
             setProducts({ products: products.data });
