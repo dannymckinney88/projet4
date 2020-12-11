@@ -1,0 +1,18 @@
+.product-card{
+    width: 15rem;
+    margin: 0 6px 12px 0;
+}
+
+.product-img{
+    width: 15rem;
+}
+
+@media (min-width: 576px) { 
+    .product-img{
+        width: 18rem;
+    }
+    .product-card{
+        width: 18rem;
+        margin: 0 6px 12px 0;
+    }
+}
