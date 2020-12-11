@@ -1,11 +1,10 @@
 import React from "react";
 import "../styles/hero.css";
 
-const Hero = () => {
-
+const Hero = (props) => {
+    console.log(props.class)
   return (
-    <div  className="hero-img">
-      <h1>test</h1>
+    <div  className={props.class_name}>
     </div>
   );
 };
