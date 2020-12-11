@@ -1,22 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import "../styles/product.css"
+import { commerce } from "../lib/commerce";
+
 const Product = (props) => {
-    console.log(props.product)
+    
+    const  [cart,setCart] = useState()
+
+    const handleAddToCart = () => {
+        commerce.cart.add(props.product.id, 1).then((item) => {
+            console.log(item)
+            setCart({ cart: item.cart })
+        }).catch((error) => {
+            console.error('There was an error adding the item to the cart', error);
+        });
+    }
+    console.log(cart)
   return (
     <div className="product-card">
       <img className="product-img" src={props.product.media.source} alt={props}/>
       <div>
       <h4 className="props.product__name">{props.product.name}</h4>
       </div>
+      <div className="props.product__details">
+            <p className="props.product__price">
+            {props.product.price.formatted_with_symbol}
+            </p>
+            <button
+               name="Add to cart"
+               className="product-btn"
+               onClick={handleAddToCart}
+            >
+              Quick Add
+            </button>
+          </div>
     </div>
-//     <div className="card" style={{width:18 + "rem"}}>
-//   <img className="card-img-top" src={props.product.media.source} alt="Card image cap"/>
-//   <div className="card-body">
-//     <h5 className="card-title">Card title</h5>
-//     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//     <a href="#" className="btn btn-primary">Go somewhere</a>
-//   </div>
-// </div>
   );
 };
 
