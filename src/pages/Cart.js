@@ -5,6 +5,8 @@ import CartItem from "../components/CartItem"
 const Cart = () => {
     const [cart, setCart] = useState()
 
+// Api calls 
+    // Gets cart
     const fetchCart = () =>{
         commerce.cart.retrieve().then((cart) => {
           console.log(cart)
@@ -13,7 +15,7 @@ const Cart = () => {
           console.error('There was an error fetching the cart', error);
         });
       }
-
+    //   Updates cart
       const handleUpdateCartQty = (lineItemId, quantity) => {
         console.log(lineItemId)
         console.log(quantity  )
@@ -24,15 +26,28 @@ const Cart = () => {
             console.log('There was an error updating the cart items', error);
           });
         }
+        //  Removes from cart
+        const handleRemoveFromCart =(lineItemId)=> {
+            commerce.cart.remove(lineItemId).then((resp) => {
+             setCart({
+                cart: resp.cart
+              })
+            }).catch((error) => {
+              console.error('There was an error removing the item from the cart', error);
+            });
+          }
 
       useEffect(()=>{fetchCart()},[])
 
-    //   console.log(cart.cart)
+// Renders a cart
       const renderEmptyCart = () =>{
         // const items = cart.cart
-         if(cart.cart.total_unique_items > 0){
-             return;
-         }
+        if(cart){
+
+            if(cart.cart.total_unique_items > 0){
+                return;
+            }
+        }
 
          return (
             <p className="cart__none">
@@ -56,11 +71,12 @@ const Cart = () => {
                 key={lineItem.id}
                 className="cart__inner"
                 handleUpdateCartQty= {handleUpdateCartQty}
+                handleRemoveFromCart= {handleRemoveFromCart}
               />
             )):"" }
             <div className="col-sm-8">
               <p className="cart__total-title">Subtotal:</p>
-              <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : ""}</p>
+              <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : "$0.00"}</p>
             </div>
           </>
         );
@@ -68,13 +84,22 @@ const Cart = () => {
 
 
     return (
-        <div className="container-fluid">
+        
+            <div className="container-fluid">
             <div className="row">
-                { renderCart() }
+                <div className="col">
+                    { renderCart() }
+                    { renderEmptyCart() }
+                </div>
+                <div className="col">
+                    <p className="cart__total-title">Subtotal:</p>
+                    <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : ""}</p>
+                </div>
+            </div>
 
             </div>
 
-        </div>
+        
     );
 }
 
