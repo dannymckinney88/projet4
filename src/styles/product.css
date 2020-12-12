@@ -1,0 +1,25 @@
+.product-card{
+    width: 12rem;
+    margin-bottom: 10px;
+    position:relative;   
+}
+
+.product-img{
+    width: 12rem;
+}
+
+.product-btn{
+    position:absolute;
+    bottom: 0;
+    right: 0;
+}
+
+@media (max-width: 800px) { 
+    .product-img{
+        width: 18rem;
+    }
+    .product-card{
+        width: 18rem;
+        margin-top: 25px;
+    }
+}

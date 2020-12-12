@@ -1,21 +1,35 @@
 import React from "react";
 import '../styles/nav.css'
-import {Navbar, Nav, NavDropdown} from "react-bootstrap"
 import {Link} from "react-router-dom"
 
 
 const Header = () => {
   return (
-    <Navbar bg="light" expand="lg">
-     <Link to={'/'}> <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand> </Link>
-    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-   <Navbar.Collapse id="basic-navbar-nav">
-      <Nav className="mr-auto">
-        <Link to={'/allproducts'}>   <Nav.Link href="#link">All Product</Nav.Link> </Link>
-        <Link to={'/cart'}>   <Nav.Link href="#link">Cart</Nav.Link> </Link>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
+<nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+            <Link to={'/'}> Home </Link>
+            </li>
+        </ul>
+    </div>
+    <div className="mx-auto order-0">
+        <h6 className="navbar-brand mx-auto" href="#">Danny's sweet shack</h6>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span className="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+                <Link to={'/allproducts'}>   All Product </Link>
+            </li>
+            <li className="nav-item">
+                <Link to={'/cart'}>  Cart </Link>
+            </li>
+        </ul>
+    </div>
+</nav>
   );
 };
 
