@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from "react";
 import { commerce } from "../lib/commerce";
 import CartItem from "../components/CartItem"
+import {Link} from "react-router-dom"
 
 const Cart = () => {
     const [cart, setCart] = useState()
@@ -94,6 +95,7 @@ const Cart = () => {
                 <div className="col">
                     <p className="cart__total-title">Subtotal:</p>
                     <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : ""}</p>
+                    {cart ?  <Link to={'/checkout'}>  Checkout </Link> : ""}
                 </div>
             </div>
 

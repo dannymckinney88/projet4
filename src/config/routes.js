@@ -5,12 +5,14 @@ import Home from "../pages/Home"
 import SingleProduct from "../pages/SingleProduct"
 import AllProducts from "../pages/AllProducts"
 import Cart from "../pages/Cart"
+import Checkout from "../pages/Checkout"
 
-export default (props) =>(
+export default () =>(
     <Switch>
          <Route exact path='/' component={Home} />
          <Route  path='/product/:id' component={SingleProduct} />
          <Route  path='/allproducts' component={AllProducts} />
          <Route  path='/cart' component={Cart} />
+         <Route  path='/checkout' component={Checkout} />
     </Switch>
 )
