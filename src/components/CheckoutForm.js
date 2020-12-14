@@ -2,63 +2,51 @@ import React, {useState, useEffect, useContext} from 'react';
 import { CartContext } from '../context/Cart'
 
 import { commerce } from "../lib/commerce";
-import CheckoutForm from "../components/CheckoutForm"
-
-const Checkout = (props) => {
-  
-    const [cart] = useContext(CartContext)
-
-    // const [cart, setCart] = useState()
-    const [checkoutToken, setCheckoutToken] = useState()
+const CheckoutForm = (props) => {
 
     const [paymentInfo, setPaymentInfo] = useState({
-      // Customer details
-      firstName: 'Jane',
-      lastName: 'Doe',
-      email: 'janedoe@email.com',
-      // Shipping details
-      shippingName: 'Jane Doe',
-      shippingStreet: '123 Fake St',
-      shippingCity: 'San Francisco',
-      shippingStateProvince: 'CA',
-      shippingPostalZipCode: '94107',
-      shippingCountry: 'US',
-      // Payment details
-      cardNum: '4242 4242 4242 4242',
-      expMonth: '11',
-      expYear: '2023',
-      ccv: '123',
-      billingPostalZipcode: '94107',
-      // Shipping and fulfillment data
-      shippingCountries: {},
-      shippingSubdivisions: {},
-      shippingOptions: [],
-      shippingOption: '',
-    })
-    const cartId = props.match.params.cartId
+        // Customer details
+        firstName: 'Jane',
+        lastName: 'Doe',
+        email: 'janedoe@email.com',
+        // Shipping details
+        shippingName: 'Jane Doe',
+        shippingStreet: '123 Fake St',
+        shippingCity: 'San Francisco',
+        shippingStateProvince: 'CA',
+        shippingPostalZipCode: '94107',
+        shippingCountry: 'US',
+        // Payment details
+        cardNum: '4242 4242 4242 4242',
+        expMonth: '11',
+        expYear: '2023',
+        ccv: '123',
+        billingPostalZipcode: '94107',
+        // Shipping and fulfillment data
+        shippingCountries: {},
+        shippingSubdivisions: {},
+        shippingOptions: [],
+        shippingOption: '',
+      })
 
+    const fetchShippingCountries =  () => {
+        // if(props.checkoutToken){
+            console.log("test===========",props.checkoutToken.id)
 
-
-    const generateCheckoutToken = () => {
-          console.log(cartId)
-          // if (props.cart.cart.line_items.length) {
-            commerce.checkout.generateToken(cartId, { type: 'cart' })
-            .then((token) => {
-              console.log(token)
-              setCheckoutToken(token);})
-              // .then(() =>fetchShippingCountries(checkoutToken.id))
-              .catch((error) => {
-                console.log('There was an error in generating a token', error);
-              });
-            // }
-            // console.log(checkoutToken.id)
-    }
-    useEffect(() =>{
-        generateCheckoutToken()
-        // console.log(checkoutToken)
-        // fetchShippingCountries(checkoutToken.id)
-    },[])
-    console.log(checkoutToken)
+             commerce.services.localeListShippingCountries(props.checkoutToken.id).then((countries) => {
+              console.log(countries)
+              setPaymentInfo({
+                
+                    shippingCountries: countries.countries,
+             })
+           })
+                .catch((error) => {
+                   console.log('There was an error fetching a list of shipping countries', error);
+               });
+        // }
+      };
+      console.log(props.checkoutToken.id)
+      useEffect(() =>{fetchShippingCountries()},[])
 
     //   const renderCheckoutForm = () => {
     //     const { shippingCountries, shippingSubdivisions, shippingOptions } = paymentInfo
@@ -96,13 +84,13 @@ const Checkout = (props) => {
     //                 className="checkout__select"
     //             >
     //                 <option disabled>Country</option>
-    //                 {
+    //                 {/* {
     //                     Object.keys(shippingCountries).map((index) => {
     //                         return (
     //                             <option value={index} key={index}>{shippingCountries[index]}</option>
     //                         );
     //                     })
-    //                 };
+    //                 }; */}
     //             </select>
 
     //             <label className="checkout__label" htmlFor="shippingStateProvince">State/province</label>
@@ -112,13 +100,13 @@ const Checkout = (props) => {
     //                 className="checkout__select"
     //             >
     //                 <option className="checkout__option" disabled>State province</option>
-    //                 {
+    //                 {/* {
     //                     Object.keys(shippingSubdivisions).map((index) => {
     //                         return (
     //                             <option value={index} key={index}>{shippingSubdivisions[index]}</option>
     //                         );
     //                     })
-    //                 };
+    //                 }; */}
 
     //             </select>
 
@@ -130,13 +118,13 @@ const Checkout = (props) => {
     //                 className="checkout__select"
     //             >
     //                 <option className="checkout__select-option" disabled>Select a shipping method</option>
-    //                 {
+    //                 {/* {
     //                     shippingOptions.map((method, index) => {
     //                         return (
     //                             <option className="checkout__select-option" value={method.id} key={index}>{`${method.description} - $${method.price.formatted_with_code}` }</option>
     //                         );
     //                     })
-    //                 };
+    //                 }; */}
     //             </select>
 
     //             <h4 className="checkout__subheading">Payment information</h4>
@@ -158,27 +146,12 @@ const Checkout = (props) => {
     //     );
     // };
       
- 
-      // useEffect( () =>{fetchShippingCountries(checkoutToken.id)})
-      
-      // useEffect((preProps, prevState) =>{
-      //   if (this.state.form.shipping.country !== prevState.form.shipping.country) {
-      //     this.fetchShippingOptions(this.state.checkoutToken.id, this.state.shippingCountry);
-      //   }
-      // })
-      //  console.log(checkoutToken.id)
-
-
-
     return (
         <div>
-            <CheckoutForm
-              checkoutToken={checkoutToken}
-              paymentInfo={paymentInfo}
-              cart={cart}
-            />
+        checkout
+            {/* {renderCheckoutForm()} */}
         </div>
     );
 }
 
-export default Checkout;
+export default CheckoutForm;

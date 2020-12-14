@@ -7,8 +7,8 @@ const CartContextProvider = (props) => {
  
     const [cart, setCart] = useState()
 
-    const fetchCart = () =>{
-      commerce.cart.retrieve().then((cart) => {
+    const fetchCart = async () =>{
+      await commerce.cart.retrieve().then((cart) => {
         console.log(cart)
         setCart({ cart });
       }).catch((error) => {
@@ -16,7 +16,7 @@ const CartContextProvider = (props) => {
       });
     }
     
-    useEffect(async ()=>{await fetchCart()},[])
+    useEffect( ()=>{ fetchCart()},[])
     console.log(props.children)
   
   return (

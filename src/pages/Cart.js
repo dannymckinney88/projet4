@@ -1,25 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import { commerce } from "../lib/commerce";
-import CartItem from "../components/CartItem"
 import {Link} from "react-router-dom"
+import { CartContext } from '../context/Cart'
+import CartItem from "../components/CartItem"
 
 const Cart = () => {
-    const [cart, setCart] = useState()
+    const [cart, setCart] = useContext(CartContext)
 
 // Api calls 
-    // Gets cart
-    const fetchCart = () =>{
-        commerce.cart.retrieve().then((cart) => {
-          console.log(cart)
-          setCart({ cart });
-        }).catch((error) => {
-          console.error('There was an error fetching the cart', error);
-        });
-      }
-    //   Updates cart
       const handleUpdateCartQty = (lineItemId, quantity) => {
-        console.log(lineItemId)
-        console.log(quantity  )
+        // console.log(lineItemId)
+        // console.log(quantity  )
           commerce.cart.update(lineItemId, { quantity }).then((resp) => {
             console.log(resp.cart)
             setCart({ cart: resp.cart })
@@ -36,9 +27,9 @@ const Cart = () => {
             }).catch((error) => {
               console.error('There was an error removing the item from the cart', error);
             });
-          }
+        }
 
-      useEffect(()=>{fetchCart()},[])
+      // useEffect(()=>{fetchCart()},[])
 
 // Renders a cart
       const renderEmptyCart = () =>{
@@ -95,7 +86,7 @@ const Cart = () => {
                 <div className="col">
                     <p className="cart__total-title">Subtotal:</p>
                     <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : ""}</p>
-                    {cart ?  <Link to={'/checkout'}>  Checkout </Link> : ""}
+                    {cart ?  <Link to={`/checkout/${cart.cart.id}`}>  Checkout </Link> : ""}
                 </div>
             </div>
 
