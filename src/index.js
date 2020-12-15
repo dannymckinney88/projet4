@@ -4,18 +4,18 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import App from "./App";
-import { CartContextProvider } from "./context/Cart"
-
+import { CartContextProvider } from "./context/Cart";
+import { PaymentContextProvider } from "./context/Payment";
 
 ReactDOM.render(
   <React.StrictMode>
-       <CartContextProvider>
-
-    <Router>
-      <App />
-    </Router>
+    <CartContextProvider>
+      <PaymentContextProvider>
+        <Router>
+          <App />
+        </Router>
+      </PaymentContextProvider>
     </CartContextProvider>
-
   </React.StrictMode>,
   document.getElementById("root")
 );

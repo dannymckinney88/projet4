@@ -137,7 +137,7 @@ const CheckoutForm = (props) => {
                 <label className="checkout__label" htmlFor="ccv">CCV</label>
                 <input className="checkout__input" onChange={props.handleFormChanges} type="text" name="ccv"  value={paymentInfo.ccv} placeholder="CCV (3 digits)" />
 
-                <button  className="checkout__btn-confirm">Confirm order</button>
+                <button onClick={props.handleCaptureCheckout} className="checkout__btn-confirm">Confirm order</button>
             </form>
         );
     };

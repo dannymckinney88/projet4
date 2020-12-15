@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { CartContext } from '../context/Cart'
+import { PaymentContext } from '../context/Payment'
 
 import { commerce } from "../lib/commerce";
 import CheckoutForm from "../components/CheckoutForm"
@@ -7,37 +8,13 @@ import CheckoutForm from "../components/CheckoutForm"
 const Checkout = (props) => {
   
     const [cart] = useContext(CartContext)
+    const [paymentInfo, setPaymentInfo] = useContext(PaymentContext)
+
 
     // const [cart, setCart] = useState()
     const [checkoutToken, setCheckoutToken] = useState()
 
-    const [paymentInfo, setPaymentInfo] = useState({
-      // Customer details
-      firstName: 'Jane',
-      lastName: 'Doe',
-      email: 'janedoe@email.com',
-      // Shipping details
-      shippingName: 'Jane Doe',
-      shippingStreet: '123 Fake St',
-      shippingCity: 'San Francisco',
-      shippingStateProvince: 'CA',
-      shippingPostalZipCode: '94107',
-      shippingCountry: 'US',
-      // Payment details
-      cardNum: '4242 4242 4242 4242',
-      expMonth: '11',
-      expYear: '2023',
-      ccv: '123',
-      billingPostalZipcode: '94107',
-      // Shipping and fulfillment data
-      shippingCountries: {},
-      shippingSubdivisions: {},
-      shippingOptions: [],
-      shippingOption: '',
-    })
     const cartId = props.match.params.cartId
-
-
 
     const generateCheckoutToken = () => {
           console.log(cartId)
@@ -62,6 +39,41 @@ const Checkout = (props) => {
         setPaymentInfo(  {...paymentInfo, [e.target.name] : e.target.value,})
     }
 
+    const handleCaptureCheckout = (e) => {
+      e.preventDefault();
+      const orderData = {
+        // line_items: paymentInfo.checkoutToken.live.line_items,
+        customer: {
+          firstname: paymentInfo.firstName,
+          lastname: paymentInfo.lastName,
+          email: paymentInfo.email,
+        },
+        shipping: {
+          name: paymentInfo.shippingName,
+          street: paymentInfo.shippingStreet,
+          town_city: paymentInfo.shippingCity,
+          county_state: paymentInfo.shippingStateProvince,
+          postal_zip_code: paymentInfo.shippingPostalZipCode,
+          country: paymentInfo.shippingCountry,
+        },
+        fulfillment: {
+          shipping_method: paymentInfo.shippingOption.id
+        },
+        payment: {
+          gateway: "test_gateway",
+          card: {
+            number: paymentInfo.cardNum,
+            expiry_month: paymentInfo.expMonth,
+            expiry_year: paymentInfo.expYear,
+            cvc: paymentInfo.ccv,
+            postal_zip_code: paymentInfo.billingPostalZipcode,
+          },
+        },
+      };
+      console.log(orderData)
+      // this.props.onCaptureCheckout(paymentInfo.checkoutToken.id, orderData);
+    };
+
 
     return (
         <div>
@@ -69,6 +81,7 @@ const Checkout = (props) => {
               checkoutToken={checkoutToken}
               paymentInfo={paymentInfo}
               handleFormChanges={handleFormChanges}
+              handleCaptureCheckout={handleCaptureCheckout}
               cart={cart}
             />
         </div>
