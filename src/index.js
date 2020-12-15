@@ -6,14 +6,17 @@ import "./index.css";
 import App from "./App";
 import { CartContextProvider } from "./context/Cart";
 import { PaymentContextProvider } from "./context/Payment";
+import { OrderContextProvider } from "./context/Order";
 
 ReactDOM.render(
   <React.StrictMode>
     <CartContextProvider>
       <PaymentContextProvider>
-        <Router>
-          <App />
-        </Router>
+        <OrderContextProvider>
+         <Router>
+           <App />
+         </Router>
+        </OrderContextProvider>
       </PaymentContextProvider>
     </CartContextProvider>
   </React.StrictMode>,

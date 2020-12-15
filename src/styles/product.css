@@ -1,11 +1,14 @@
 .product-card{
-    width: 12rem;
+    width: 13rem;
     margin-bottom: 10px;
     position:relative;   
 }
 
+.all-prod{
+    margin-left: 15px
+}
 .product-img{
-    width: 12rem;
+    width: 100%;
 }
 
 .product-btn{

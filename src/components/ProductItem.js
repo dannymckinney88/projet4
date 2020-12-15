@@ -16,7 +16,6 @@ const Product = (props) => {
             console.error('There was an error adding the item to the cart', error);
         });
     }
-    console.log(cart)
   return (
     <div className="product-card">
       <img className="product-img" src={props.product.media.source} alt={props}/>

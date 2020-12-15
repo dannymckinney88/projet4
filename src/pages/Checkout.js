@@ -1,15 +1,16 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { CartContext } from '../context/Cart'
 import { PaymentContext } from '../context/Payment'
-
+import { OrderContext } from '../context/Order'
 import { commerce } from "../lib/commerce";
 import CheckoutForm from "../components/CheckoutForm"
 
 const Checkout = (props) => {
   
-    const [cart] = useContext(CartContext)
+    const [cart, setCart] = useContext(CartContext)
     const [paymentInfo, setPaymentInfo] = useContext(PaymentContext)
-
+    const [order, setOrder] = useContext(OrderContext)
+    const [errormsg, setErrormsg] = useState()
 
     // const [cart, setCart] = useState()
     const [checkoutToken, setCheckoutToken] = useState()
@@ -17,7 +18,6 @@ const Checkout = (props) => {
     const cartId = props.match.params.cartId
 
     const generateCheckoutToken = () => {
-          console.log(cartId)
           // if (props.cart.cart.line_items.length) {
             commerce.checkout.generateToken(cartId, { type: 'cart' })
             .then((token) => {
@@ -31,7 +31,7 @@ const Checkout = (props) => {
     useEffect(() =>{
         generateCheckoutToken()
     },[])
-    console.log(paymentInfo)
+
 
    
 
@@ -41,7 +41,7 @@ const Checkout = (props) => {
 
     const refreshCart = () => {
       commerce.cart.refresh().then((newCart) => {
-        this.setState({ 
+        setCart({ 
           cart: newCart,
         });
       }).catch((error) => {
@@ -49,42 +49,66 @@ const Checkout = (props) => {
       });
     };
 
-    const handleCaptureCheckout = (e) => {
-      e.preventDefault();
-      const orderData = {
-        // line_items: paymentInfo.checkoutToken.live.line_items,
-        customer: {
-          firstname: paymentInfo.firstName,
-          lastname: paymentInfo.lastName,
-          email: paymentInfo.email,
-        },
-        shipping: {
-          name: paymentInfo.shippingName,
-          street: paymentInfo.shippingStreet,
-          town_city: paymentInfo.shippingCity,
-          county_state: paymentInfo.shippingStateProvince,
-          postal_zip_code: paymentInfo.shippingPostalZipCode,
-          country: paymentInfo.shippingCountry,
-        },
-        fulfillment: {
-          shipping_method: paymentInfo.shippingOption.id
-        },
-        payment: {
-          gateway: "test_gateway",
-          card: {
-            number: paymentInfo.cardNum,
-            expiry_month: paymentInfo.expMonth,
-            expiry_year: paymentInfo.expYear,
-            cvc: paymentInfo.ccv,
-            postal_zip_code: paymentInfo.billingPostalZipcode,
-          },
-        },
-      };
-      console.log(orderData)
+    const handleCaptureCheckout = async (tokenId, newOrder) => {
+     
+      console.log(newOrder)
+      await commerce.checkout.capture(tokenId, newOrder).then((order) => {
+        console.log(order)
+        console.log("order")
+        // Save the order into state
+        setOrder({
+          order,
+        });
+        // Clear the cart
+        console.log(order)
+        refreshCart();
+        // setPaymentInfo({})
+        // Send the user to the receipt 
+        props.history.push('/confirmation');
+        // Store the order in session storage so we can show it again if the
+        // user refreshes the page!
+        window.sessionStorage.setItem('order_receipt', JSON.stringify(order));   
+      }).catch((error) => {
+        // setErrormsg(error.data.error.message)
+        console.log(error);
+        // console.log(errormsg)
+      });
+      console.log(order)
       // this.props.onCaptureCheckout(paymentInfo.checkoutToken.id, orderData);
     };
 
+    const getShippingOptions = (checkoutTokenId, country, region = null) => {
 
+      /* 
+      Getting the Customer's Shipping Options based on the Country
+      Function is triggered once user selects country in CheckoutForm. 
+      */
+     
+     
+    //  if (checkoutToken) {
+    //   console.log(checkoutToken.id)
+    //       commerce.checkout.getShippingOptions(checkoutToken.id, {
+    //           country: "US"
+    //       })
+    //           .then(res => {
+    //               console.log(res)
+    //               console.log('======++==========++======++========++')
+    //               let shippingOptionsArray = res.map(option => {
+    //                   console.log(option)
+    //                   let shInfo = {}
+  
+    //                   shInfo.key = "US"
+    //                   shInfo.text = `${option.description}(${option.price.formatted_with_code})`
+    //                   shInfo.value = option.id
+  
+    //                   return shInfo
+    //               })
+    //               // setShippingOptions(shippingOptionsArray)
+    //           })
+    //           .catch(err => console.log(err))
+    //   }
+  }
+  // useEffect(() =>{getShippingOptions()})
     return (
         <div>
             <CheckoutForm
