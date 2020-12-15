@@ -88,7 +88,7 @@ const Cart = (props) => {
                 <div className="col">
                     <p className="cart__total-title">Subtotal:</p>
                     <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : ""}</p>
-                    {cart ?  <Link to={`/checkout/${cart.cart.id}`}>  Checkout </Link> : ""}
+                    {cart ?  <Link to={`/checkout/${cart.cart.id}`} onClick={props.handleClose}>  Checkout </Link> : ""}
                 </div>
             </div>
 

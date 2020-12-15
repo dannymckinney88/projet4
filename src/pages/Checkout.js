@@ -31,13 +31,23 @@ const Checkout = (props) => {
     useEffect(() =>{
         generateCheckoutToken()
     },[])
-    console.log(checkoutToken)
+    console.log(paymentInfo)
 
    
 
       const handleFormChanges = e =>{
         setPaymentInfo(  {...paymentInfo, [e.target.name] : e.target.value,})
     }
+
+    const refreshCart = () => {
+      commerce.cart.refresh().then((newCart) => {
+        this.setState({ 
+          cart: newCart,
+        });
+      }).catch((error) => {
+        console.log('There was an error refreshing your cart', error);
+      });
+    };
 
     const handleCaptureCheckout = (e) => {
       e.preventDefault();
