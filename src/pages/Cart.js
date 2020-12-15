@@ -3,8 +3,9 @@ import { commerce } from "../lib/commerce";
 import {Link} from "react-router-dom"
 import { CartContext } from '../context/Cart'
 import CartItem from "../components/CartItem"
+import {Modal, Button} from "react-bootstrap"
 
-const Cart = () => {
+const Cart = (props) => {
     const [cart, setCart] = useContext(CartContext)
 
 // Api calls 
@@ -54,6 +55,7 @@ const Cart = () => {
               return;
           }
 
+          console.log(cart.cart)
         }
       return (
           <>
@@ -77,7 +79,7 @@ const Cart = () => {
 
     return (
         
-            <div className="container-fluid">
+            <Modal show={props.show} onHide={props.handleClose} className="container-fluid">
             <div className="row">
                 <div className="col">
                     { renderCart() }
@@ -90,7 +92,7 @@ const Cart = () => {
                 </div>
             </div>
 
-            </div>
+            </Modal>
 
         
     );

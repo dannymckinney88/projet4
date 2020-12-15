@@ -1,10 +1,17 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {Button} from 'react-bootstrap'
 import '../styles/nav.css'
 import {Link} from "react-router-dom"
+import Cart from '../pages/Cart'
 
 
 const Header = (props) => {
     // console.log(props.cart)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
   return (
 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
     <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -26,7 +33,11 @@ const Header = (props) => {
                 <Link to={'/allproducts'}>   All Product </Link>
             </li>
             <li className="nav-item">
-                <Link to={'/cart'}>  Cart </Link>
+                {/* <Link to={'/cart'}>  Cart </Link> */}
+                <Button variant="primary" onClick={handleShow}>
+                Launch demo modal
+                </Button>
+                <Cart show={show} handleShow={handleShow} handleClose={handleClose}/>
             </li>
         </ul>
     </div>

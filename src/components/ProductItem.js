@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useContext} from "react";
 import "../styles/product.css"
 import { commerce } from "../lib/commerce";
+import { CartContext } from '../context/Cart'
+ 
 
 const Product = (props) => {
     
-    const  [cart,setCart] = useState()
+  const [cart, setCart] = useContext(CartContext)
 
     const handleAddToCart = () => {
         commerce.cart.add(props.product.id, 1).then((item) => {
