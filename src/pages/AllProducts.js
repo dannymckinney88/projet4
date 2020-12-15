@@ -7,7 +7,7 @@ const AllProducts = () => {
     const [products, setProducts] = useState()
     const fetchProducts = () => {
         commerce.products
-          .list(  )
+          .list( {limit:200} )
           .then((products) => {
             console.log(products.data);
             setProducts({ products: products.data });
@@ -20,9 +20,14 @@ const AllProducts = () => {
       useEffect(() =>{fetchProducts()}, [])
       console.log(products)
     return (
-        <div>
+        <div className="container-fluid">
+        <div className="row">
+          <div className="col all-prod">
+
             All products
             {products?   <Products products={products.products}/> : "No products this is an error"}
+          </div>
+        </div>
         </div>
     );
 }
