@@ -35,7 +35,7 @@ const Header = (props) => {
             <li className="nav-item">
                 {/* <Link to={'/cart'}>  Cart </Link> */}
                 <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
+                Cart
                 </Button>
                 <Cart show={show} handleShow={handleShow} handleClose={handleClose}/>
             </li>
