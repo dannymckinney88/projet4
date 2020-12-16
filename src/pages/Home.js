@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { commerce } from "../lib/commerce";
 import Hero from '../components/Hero'
 import Products from '../components/Products'
+import '../styles/home.css'
 
 
 const Home = () => {
@@ -34,8 +35,16 @@ const Home = () => {
       console.log(products)
     return (    
         <div className="container-fluid">
-        <Hero class_name="hero-img-home"/>
-        {products?   <Products products={products.products}/> : ""}
+          <Hero class_name="hero-img-home"/>
+            <div className="row">
+              <div className="col">
+                <div className="featured-container">
+                <h4>Featured</h4>
+                  {products?   <Products products={products.products}/> : ""}
+
+                </div>
+              </div>
+            </div>
       
         </div>
     );

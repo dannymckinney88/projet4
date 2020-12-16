@@ -10,7 +10,11 @@ const Checkout = (props) => {
     const [cart, setCart] = useContext(CartContext)
     const [paymentInfo, setPaymentInfo] = useContext(PaymentContext)
     const [order, setOrder] = useContext(OrderContext)
-    const [errormsg, setErrormsg] = useState()
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    
 
     // const [cart, setCart] = useState()
     const [checkoutToken, setCheckoutToken] = useState()

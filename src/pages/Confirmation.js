@@ -1,10 +1,26 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import { PaymentContext } from '../context/Payment'
+import { OrderContext } from '../context/Order'
+import {Modal, Button} from "react-bootstrap"
 
-function Confirmation() {
+function Confirmation(props) {
+
+    const [order, setOrder] = useContext(OrderContext)
+    // console.log(order)
+    console.log(props.show)
     return (
-        <div>
-            f
+        <Modal  show={props.show} className="container-fluid">
+        <div className="row">
+            <div className="col">
+             tests
+            </div>
+            <div className="col">
+           22323
+            </div>
         </div>
+
+        </Modal>
+
     )
 }
 
