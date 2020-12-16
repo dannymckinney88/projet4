@@ -194,7 +194,7 @@ const CheckoutForm = (props) => {
             </form>
         );
     };
-      
+      console.log(props.handleShow)
     return (
         <div>
         checkout
