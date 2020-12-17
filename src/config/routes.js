@@ -6,6 +6,8 @@ import SingleProduct from "../pages/SingleProduct";
 import AllProducts from "../pages/AllProducts";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
+// import Confirmation from "../components/Confirmation";
+
 
 export default (props) => (
   <Switch>
@@ -13,6 +15,7 @@ export default (props) => (
     <Route path="/product/:id" component={SingleProduct} />
     <Route path="/allproducts" component={AllProducts} />
     <Route path="/cart" component={Cart} />
+    {/* <Route path="/confirmation" component={Confirmation} /> */}
     {/* <Route  path='/checkout' component={Checkout} /> */}
     <Route
       path="/checkout/:cartId"

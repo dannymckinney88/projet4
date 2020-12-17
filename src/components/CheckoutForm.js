@@ -98,9 +98,8 @@ const CheckoutForm = (props) => {
       },
     };
 
-    console.log(checkoutToken);
-    console.log(orderData);
     props.handleCaptureCheckout(checkoutToken.id, orderData);
+    props.handleShow()
   };
 
   const renderCheckoutForm = () => {
@@ -159,7 +158,7 @@ const CheckoutForm = (props) => {
                     onChange={props.handleFormChanges}
                     type="email"
                     className="form-control"
-                    placeholder="email"
+                    placeholder="Enter full name"
                   />
                 </div>
                 <div className="form-group">
@@ -169,7 +168,7 @@ const CheckoutForm = (props) => {
                     onChange={props.handleFormChanges}
                     type="email"
                     className="form-control"
-                    placeholder="email"
+                    placeholder="Enter street address"
                   />
                 </div>
                 <div className="coutnry">
