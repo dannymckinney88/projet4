@@ -19,12 +19,12 @@ const CartItem = (props) => {
             </div>
             <div className="col cart-btn-container">
                 <div className="button-wrapper">
-                    <a  type="button"  onClick={() => props.handleUpdateCartQty(item.id, item.quantity  - 1 )} className="cart-btn minus" > <i class="cart-btn far fa-minus-square fa-2x"></i> </a>
+                    <button  type="button"  onClick={() => props.handleUpdateCartQty(item.id, item.quantity  - 1 )} className="cart-btn minus" > <i class="cart-btn far fa-minus-square fa-2x"></i> </button>
                     <p className="quantity">{item.quantity}</p>
                 </div>
-                    <a type="button" onClick={() =>props.handleUpdateCartQty(item.id, item.quantity + 1 )} className="cart-btn"> <i class="fas fa-plus fa-2x"></i> </a>
+                    <button type="button" onClick={() =>props.handleUpdateCartQty(item.id, item.quantity + 1 )} className="cart-btn"> <i class="fas fa-plus fa-2x"></i> </button>
                 <div className="trash-wrapper">
-                    <a type="button" className="cart-btn trash-btn" onClick={() => props.handleRemoveFromCart(item.id)}> <i class="far fa-trash-alt fa-2x"></i> </a>
+                    <button type="button" className="cart-btn trash-btn" onClick={() => props.handleRemoveFromCart(item.id)}> <i class="far fa-trash-alt fa-2x"></i> </button>
                 </div>
             </div>
         </div>
