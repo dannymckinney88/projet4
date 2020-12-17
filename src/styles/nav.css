@@ -1,4 +1,21 @@
+.nav-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .navbar{
     display: flex;
     align-items: center;
+}
+
+.nav-left{
+    display: flex;
+}
+
+.nav-right{
+    margin-right: 30px;
+}
+
+li{
+    list-style-type: none;
 }
