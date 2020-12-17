@@ -21,17 +21,17 @@ const AllProducts = () => {
       useEffect(() =>{fetchProducts()}, [])
       console.log(products)
     return (
-      <>
+      <div>
         <div className="hero-img"></div>
+            <h4 className="list-header"> All products</h4>
         <div className="container-fluid">
         <div className="row">
           <div className="col all-prod">
-            <h4 className="list-header"> All products</h4>
             {products?   <Products products={products.products}/> : "No products this is an error"}
           </div>
         </div>
         </div>
-        </>
+        </div>
     );
 }
 
