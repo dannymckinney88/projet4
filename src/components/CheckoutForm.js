@@ -1,6 +1,5 @@
 import React, {useState,useEffect, useContext} from 'react';
 import { PaymentContext } from '../context/Payment'
-import Confirmation from './Confirmation'
 import '../styles/form.css'
 
 import { commerce } from "../lib/commerce";
@@ -60,8 +59,6 @@ const CheckoutForm = (props) => {
                 .catch(err => console.log(err))
         }
     }
-    
-    // useEffect(() =>{fetchShippingCountries()},[])
     useEffect(() =>{fetchSubdivisions()},[checkoutToken])
 
     useEffect(() =>{getShippingOptions()},[checkoutToken])
