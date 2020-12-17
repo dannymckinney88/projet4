@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CartContext } from "./context/Cart";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Routes from "./config/routes";
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
     <div>
       <Header cart={cart} />
       <Routes checkout={checkoutToken} />
+      <Footer/>
     </div>
   );
 };

@@ -1,0 +1,26 @@
+.footer-container{
+    display: flex;
+    background-color:black;
+    width: 100%;
+    color: white;
+    justify-content: center;
+    height: 35px;
+}
+
+.footer-icon{
+    color: white;
+    position: relative;
+    font-size: 28px;
+    top: 6px;
+    margin-left:10px;
+}
+
+.footer-icon:hover{
+    color: red;
+}
+
+.footer-text{
+    position: relative;
+    top: 9px;
+    margin-right:10px;
+}
