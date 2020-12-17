@@ -33,11 +33,11 @@ const Home = () => {
   return (
     <>
       <Hero class_name="hero-img-home" />
+              <h4 className="featured">Featured</h4>
       <div className="container-fluid">
         <div className="row">
           <div className="col">
             <div className="featured-container">
-              <h4 className="featured">Featured</h4>
               {products ? <Products products={products.products} /> : ""}
             </div>
           </div>

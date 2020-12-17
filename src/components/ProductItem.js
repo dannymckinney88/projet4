@@ -18,31 +18,33 @@ const Product = (props) => {
       });
   };
   return (
-    <div className="product-card">
-      <img
-        className="product-img"
-        src={props.product.media.source}
-        alt={props}
-      />
-      <div>
-        <Link
-          to={`/product/${props.product.id}`}
-          style={{ textDecoration: "none" }}
-        >
-          {" "}
-          <h4 className="item-name">{props.product.name}</h4>{" "}
-        </Link>
+    <div className="product-card col-sm-12 col-md-4 ">
+      <div className="product">
+        <img
+          className="product-img"
+          src={props.product.media.source}
+          alt={props}
+        />
+        <div>
+          <Link
+            to={`/product/${props.product.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            {" "}
+            <h4 className="item-name">{props.product.name}</h4>{" "}
+          </Link>
+        </div>
+        <div >
+          <p>{props.product.price.formatted_with_symbol}</p>
+        </div>
       </div>
-      <div>
-        <p>{props.product.price.formatted_with_symbol}</p>
-        <button
-          name="Add to cart"
-          className="product-btn"
-          onClick={handleAddToCart}
-        >
-          Quick Add
-        </button>
-      </div>
+          <button
+            name="Add to cart"
+            className="product-btn"
+            onClick={handleAddToCart}
+          >
+            Quick Add
+          </button>
     </div>
   );
 };
