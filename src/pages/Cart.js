@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 import { CartContext } from '../context/Cart'
 import CartItem from "../components/CartItem"
 import {Modal, Button} from "react-bootstrap"
+import '../styles/cart.css'
 
 const Cart = (props) => {
     const [cart, setCart] = useContext(CartContext)
@@ -68,10 +69,6 @@ const Cart = (props) => {
                 handleRemoveFromCart= {handleRemoveFromCart}
               />
             )):"" }
-            <div className="col-sm-8">
-              <p className="cart__total-title">Subtotal:</p>
-              <p className="cart__total-price">{cart ? cart.cart.subtotal.formatted_with_symbol : "$0.00"}</p>
-            </div>
           </>
         );
   }
