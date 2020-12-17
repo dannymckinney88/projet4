@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/cart.css'
+
 
 const CartItem = (props) => {
 
@@ -18,13 +18,13 @@ const CartItem = (props) => {
                 <p> {item.price.formatted_with_symbol} </p>
             </div>
             <div className="col cart-btn-container">
-                <div>
-                    <button type="button"  onClick={() => props.handleUpdateCartQty(item.id, item.quantity  - 1 )} title="Reduce quantity">-</button>
-                    <button type="button" onClick={() =>props.handleUpdateCartQty(item.id, item.quantity + 1 )} title="Increase quantity">+</button>
-                    <p>{item.quantity}</p>
+                <div className="button-wrapper">
+                    <a  type="button"  onClick={() => props.handleUpdateCartQty(item.id, item.quantity  - 1 )} className="cart-btn minus" > <i class="cart-btn far fa-minus-square fa-2x"></i> </a>
+                    <p className="quantity">{item.quantity}</p>
                 </div>
-                <div>
-                    <button type="button" className="cart-item__remove" onClick={() => props.handleRemoveFromCart(item.id)}>Remove</button>
+                    <a type="button" onClick={() =>props.handleUpdateCartQty(item.id, item.quantity + 1 )} className="cart-btn"> <i class="fas fa-plus fa-2x"></i> </a>
+                <div className="trash-wrapper">
+                    <a type="button" className="cart-btn trash-btn" onClick={() => props.handleRemoveFromCart(item.id)}> <i class="far fa-trash-alt fa-2x"></i> </a>
                 </div>
             </div>
         </div>
