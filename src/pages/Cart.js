@@ -1,9 +1,9 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import { commerce } from "../lib/commerce";
 import {Link} from "react-router-dom"
 import { CartContext } from '../context/Cart'
 import CartItem from "../components/CartItem"
-import {Modal, Button} from "react-bootstrap"
+import {Modal} from "react-bootstrap"
 import '../styles/cart.css'
 
 const Cart = (props) => {

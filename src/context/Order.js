@@ -1,17 +1,15 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 
 const OrderContext = createContext();
 
 const OrderContextProvider = (props) => {
- 
-    const [orderContext, setOrderContext] = useState()
+  const [orderContext, setOrderContext] = useState();
 
-  
   return (
-    <OrderContext.Provider value={[OrderContext, setOrderContext]}>
+    <OrderContext.Provider value={[orderContext, setOrderContext]}>
       {props.children}
     </OrderContext.Provider>
   );
 };
 
-export { OrderContext ,OrderContextProvider };
+export { OrderContext, OrderContextProvider };

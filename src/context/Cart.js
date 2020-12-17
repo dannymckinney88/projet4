@@ -4,21 +4,24 @@ import { commerce } from "../lib/commerce";
 const CartContext = createContext();
 
 const CartContextProvider = (props) => {
- 
-    const [cart, setCart] = useState()
+  const [cart, setCart] = useState();
 
-    const fetchCart = async () =>{
-      await commerce.cart.retrieve().then((cart) => {
-        console.log(cart)
+  const fetchCart = async () => {
+    await commerce.cart
+      .retrieve()
+      .then((cart) => {
         setCart({ cart });
-      }).catch((error) => {
-        console.error('There was an error fetching the cart', error);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the cart", error);
       });
-    }
-    
-    useEffect( ()=>{ fetchCart()},[])
-    console.log(props.children)
-  
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
+  console.log(props.children);
+
   return (
     <CartContext.Provider value={[cart, setCart]}>
       {props.children}
@@ -26,4 +29,4 @@ const CartContextProvider = (props) => {
   );
 };
 
-export { CartContext ,CartContextProvider };
+export { CartContext, CartContextProvider };

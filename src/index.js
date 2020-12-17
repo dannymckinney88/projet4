@@ -13,9 +13,9 @@ ReactDOM.render(
     <CartContextProvider>
       <PaymentContextProvider>
         <OrderContextProvider>
-         <Router>
-           <App />
-         </Router>
+          <Router>
+            <App />
+          </Router>
         </OrderContextProvider>
       </PaymentContextProvider>
     </CartContextProvider>

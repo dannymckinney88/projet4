@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { commerce } from "../lib/commerce";
 import Products from '../components/Products'
-import allProducts from '../styles/allProducts.css'
+import  '../styles/allProducts.css'
 
 const AllProducts = () => {
 
