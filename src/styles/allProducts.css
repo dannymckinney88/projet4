@@ -1,0 +1,15 @@
+.hero-img{
+    background-image: url("../img/hero-all.jpg");
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat; 
+     background-size: cover;
+     margin-top: 10px;
+    /* position: relative; */
+}
+
+.list-header{
+    text-align: center;
+    position: relative;
+    top: 55px;
+}

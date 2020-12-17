@@ -1,35 +1,58 @@
-import React from "react";
-import '../styles/nav.css'
-import {Link} from "react-router-dom"
-
+import React, { useState } from "react";
+import "../styles/nav.css";
+import { Link } from "react-router-dom";
+import Cart from "../pages/Cart";
 
 const Header = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-<nav className="navbar navbar-expand-md navbar-dark bg-dark">
-    <div className="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-            <Link to={'/'}> Home </Link>
+    //   <>
+    //   </>
+
+    <nav>
+      <div className="nav-wrapper">
+        <div>
+          <ul className="nav-left">
+            <li>
+              <Link to={"/"} style={{ textDecoration: "none" }}>
+                {" "}
+                <p className="navbar-link">Home</p>{" "}
+              </Link>
             </li>
-        </ul>
-    </div>
-    <div className="mx-auto order-0">
-        <h6 className="navbar-brand mx-auto" href="#">Danny's sweet shack</h6>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span className="navbar-toggler-icon"></span>
-        </button>
-    </div>
-    <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-                <Link to={'/allproducts'}>   All Product </Link>
+            <li>
+              <Link to={"/allproducts"} style={{ textDecoration: "none" }}>
+                {" "}
+                <p className="navbar-link">All products</p>{" "}
+              </Link>
             </li>
-            <li className="nav-item">
-                <Link to={'/cart'}>  Cart </Link>
+          </ul>
+        </div>
+        <div className="nav-mid">
+          <h6 className="nav-logo" href="#">
+            Danny's Delicious Deserts
+          </h6>
+        </div>
+        <div className="nav-right">
+          <ul>
+            <li>
+              <button href="#" className="cart-nav-btn" onClick={handleShow}>
+                {" "}
+                <i class="fas fa-shopping-cart fa-2x"></i>
+              </button>
+              <Cart
+                show={show}
+                handleShow={handleShow}
+                handleClose={handleClose}
+              />
             </li>
-        </ul>
-    </div>
-</nav>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 

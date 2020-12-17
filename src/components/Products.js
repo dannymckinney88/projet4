@@ -1,9 +1,9 @@
 import React from "react";
-import ProductItem from "./ProductItem"
-import '../styles/products.css'
+import ProductItem from "./ProductItem";
+import "../styles/products.css";
 
 const Products = (props) => {
-  console.log(props.products);
+
   return (
     <div className="products-container">
       {props.products
