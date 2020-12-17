@@ -1,7 +1,7 @@
 import React, {useState,useEffect, useContext} from 'react';
 import { PaymentContext } from '../context/Payment'
-// import {Elements, CardElement,}
-
+import Confirmation from './Confirmation'
+import '../styles/form.css'
 
 import { commerce } from "../lib/commerce";
 const CheckoutForm = (props) => {
@@ -67,6 +67,7 @@ const CheckoutForm = (props) => {
     useEffect(() =>{getShippingOptions()},[checkoutToken])
 
     const handleCaptureCheckout = async (e) => {
+        console.log(checkoutToken.live)
         e.preventDefault()
         const orderData = {
           line_items: checkoutToken.live.line_items,
@@ -103,102 +104,198 @@ const CheckoutForm = (props) => {
         props.handleCaptureCheckout(checkoutToken.id, orderData);
       };
       
+    const renderCheckoutForm = () =>{
+             const { shippingCountries, shippingSubdivisions, shippingOptions } = paymentInfo
+        return(
+        <>
+        <form onChange={props.handleFormChanges}>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col">
+              <h6>Personal info</h6>
+                <div className="personal-info">
+                  <div className="form-group">
+                    <label>First Name</label>
+                    <input
+                    onChange={props.handleFormChanges}
+                      type="name"
+                      name="firstName"
+                      className="form-control"
+                      aria-describedby="emailHelp"
+                      placeholder="Enter first name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Last Name</label>
+                    <input
+                    onChange={props.handleFormChanges}
+                      type="name"
+                      name="lastName"
+                      className="form-control"
+                      placeholder="Enter last name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Email</label>
+                    <input
+                    name="email"
+                    onChange={props.handleFormChanges}
+                      type="email"
+                      className="form-control"
+                      placeholder="email"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col">
+              <h6>shipping info</h6>
+              <div className="form-group">
+                    <label>Full name</label>
+                    <input
+                    name="shippingName"
+                    onChange={props.handleFormChanges}
+                      type="email"
+                      className="form-control"
+                      placeholder="email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Street address</label>
+                    <input
+                    name="shippingStreet"
+                    onChange={props.handleFormChanges}
+                      type="email"
+                      className="form-control"
+                      placeholder="email"
+                    />
+                  </div>
+                <div className="coutnry">
+                <div className="form-group">
+                    <label>City</label>
+                    <input
+                    name="shippingCity"
+                    onChange={props.handleFormChanges}
+                      type="email"
+                      className="form-control"
+                      placeholder="Enter city"
+                    />
+                  </div>
 
-      const renderCheckoutForm = () => {
-        const { shippingCountries, shippingSubdivisions, shippingOptions } = paymentInfo
-        return (
-            <form className="checkout__form" onChange={props.handleFormChanges}>
-                <h4 className="checkout__subheading">Customer information</h4>
 
-                    <label className="checkout__label" htmlFor="firstName">First name</label>
-                    <input className="checkout__input" type="text" onChange={props.handleFormChanges}  name="firstName" placeholder="Enter your first name" required />
+                  <select
+                      name="shippingStateProvince"
+                      onChange={props.handleFormChanges}
+                      className="custom-select w-25 mt-3"
+                  >
+                      <option className="checkout__option" disabled>Select state</option>
+                      {checkoutToken?
+                          Object.keys(shippingSubdivisions).map((index) => {
+                              return (
+                                  <option  value={index} key={index}>{shippingSubdivisions[index]}</option>
+                              );
+                          }) :""
+                      };
+  
+                  </select>
 
-                    <label className="checkout__label" htmlFor="lastName">Last name</label>
-                    <input className="checkout__input" type="text" onChange={props.handleFormChanges}  name="lastName" placeholder="Enter your last name" required />
-
-                    <label className="checkout__label" htmlFor="email">Email</label>
-                    <input className="checkout__input" type="text" onChange={props.handleFormChanges}   name="email" placeholder="Enter your email" required />
-
-                <h4 className="checkout__subheading">Shipping details</h4>
-
-                <label className="checkout__label" htmlFor="shippingName">Full name</label>
-                <input className="checkout__input" type="text" onChange={props.handleFormChanges}   name="shippingName" placeholder="Enter your shipping full name" required />
-
-                <label className="checkout__label" htmlFor="shippingStreet">Street address</label>
-                <input className="checkout__input" type="text"  onChange={props.handleFormChanges}  name="shippingStreet" placeholder="Enter your street address" required />
-
-                <label className="checkout__label" htmlFor="shippingCity">City</label>
-                <input className="checkout__input" type="text" onChange={props.handleFormChanges}  name="shippingCity" placeholder="Enter your city" required />
-
-                <label className="checkout__label" htmlFor="shippingPostalZipCode">Postal/Zip code</label>
-                <input className="checkout__input" type="text" onChange={props.handleFormChanges}  name="shippingPostalZipCode" placeholder="Enter your postal/zip code" required />
-
-                <label className="checkout__label" htmlFor="shippingCountry">Country</label>
-                <select
+                  <select
                     name="shippingCountry"
-                    className="checkout__select"
+                    className="custom-select w-25 mt-3"
                 >
                     <option disabled>Country</option>
                     <option>USA</option>
-                    {/* {
-                        Object.keys(shippingSubdivisions).map((index) => {
-                            return (
-                                <option  value={index} key={index}>{shippingSubdivisions[index]}</option>
-                            );
-                        })
-                    } */}
                 </select>
 
-                <label className="checkout__label" htmlFor="shippingStateProvince">State/province</label>
-                <select
-                    name="shippingStateProvince"
+                </div>
+                  <div className="form-group">
+                    <label>Postal/Zip code</label>
+                    <input
+                     name="shippingPostalZipCode"
                     onChange={props.handleFormChanges}
-                    className="checkout__select"
-                >
-                    <option className="checkout__option" disabled>State province</option>
-                    {checkoutToken?
-                        Object.keys(shippingSubdivisions).map((index) => {
-                            return (
-                                <option  value={index} key={index}>{shippingSubdivisions[index]}</option>
-                            );
-                        }) :""
-                    };
-
-                </select>
-
-                <label className="checkout__label" htmlFor="shippingOption">Shipping method</label>
-                <select
-                    name="shippingOption"
-                    
-                    className="checkout__select"
-                >
-                    <option className="checkout__select-option" disabled>Select a shipping method</option>
-                    <option>Free standard</option>
-                </select>
-
-                <h4 className="checkout__subheading">Payment information</h4>
-
-                <label className="checkout__label" htmlFor="cardNum">Credit card number</label>
-                <input className="checkout__input" onChange={props.handleFormChanges} type="text" name="cardNum"   placeholder="Enter your card number" required/>
-
-                <label className="checkout__label" htmlFor="expMonth">Expiry month</label>
-                <input className="checkout__input" onChange={props.handleFormChanges} type="text" name="expMonth"   placeholder="Card expiry month" required/>
-
-                <label className="checkout__label" htmlFor="expYear">Expiry year</label>
-                <input className="checkout__input" onChange={props.handleFormChanges} type="text" name="expYear"   placeholder="Card expiry year" required/>
-
-                <label className="checkout__label" htmlFor="ccv">CCV</label>
-                <input className="checkout__input" onChange={props.handleFormChanges} type="text" name="ccv"  placeholder="CCV (3 digits)" required/>
-
-                <button onClick={(e)=>{handleCaptureCheckout(e)}} className="checkout__btn-confirm">Confirm order</button>
-            </form>
-        );
-    };
-      console.log(props.handleShow)
+                      type="email"
+                      className="form-control"
+                      placeholder="Enter zipcode"
+                    />
+                  </div>
+              </div>
+            </div>
+            <div className="row">
+                <div className="col cc">
+              
+                <div className="form-group w-50">
+                <label for="ccn">Credit Card Number</label>
+                    <input
+                    onChange={props.handleFormChanges}
+                  className="form-control"
+                  type="tel"
+                  name="cardNum"
+                  inputmode="numeric"
+                  pattern="[0-9\s]{13,19}"
+                  autocomplete="cc-number"
+                  maxlength="19"
+                  placeholder="xxxx xxxx xxxx xxxx"
+                ></input>
+                  </div>
+                  <div className="form-group w-25">
+                  <label for="ccn">CCV</label>
+                  <input
+                  className="form-control"
+                  onChange={props.handleFormChanges}
+                  type="tel"
+                  inputmode="numeric"
+                  pattern="[0-9\s]"
+                  autocomplete="cc-number"
+                  maxlength="3"
+                  name="ccv"
+                  placeholder="Enter 3 digit code"
+                ></input>
+                  </div>
+               
+                  
+            
+                <div className="date">
+                <div className="form-group w-25">
+                    <label>Month</label>
+                    <input
+                    onChange={props.handleFormChanges}
+                      name="expMonth"
+                      maxlength="2"
+                      type="text"
+                      className="form-control"
+                      placeholder="12"
+                    />
+                  </div>
+                  <div className="form-group w-25">
+                    <label>Year</label>
+                    <input
+                    onChange={props.handleFormChanges}
+                      name="expYear" 
+                      maxlength="4"
+                      type="text"
+                      className="form-control"
+                      placeholder="2020"
+                    />
+                  </div>
+                </div>
+                </div>
+            </div>
+          </div>
+  
+          <button onClick={(e)=>{handleCaptureCheckout(e)}} class="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      </>)
+    }
+      console.log(paymentInfo)
     return (
+        // <>
+
+        // </>
         <div>
         checkout
             {renderCheckoutForm()}
+            {/* <Confirmation/> */}
         </div>
     );
 }
