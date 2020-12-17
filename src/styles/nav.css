@@ -2,11 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: black;
+    align-items: baseline;
+    color: white;
 }
-.navbar{
+/* .navbar{
     display: flex;
     align-items: center;
-}
+} */
 
 .nav-left{
     display: flex;
@@ -14,8 +17,36 @@
 
 .nav-right{
     margin-right: 30px;
+    /* align-items: center; */
 }
 
+.navbar-link{
+    color: white;
+    padding-right: 20px;
+}
+
+.navbar-link:hover{
+    color:red;
+}
+Link{
+    text-decoration: none;
+}
+.nav-logo{
+    position: relative;
+    top: 8px;
+}
+.fa-shopping-cart{
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+}
+.fa-shopping-cart:hover{
+    color:red;
+}
 li{
+    position: relative;
+    top: 8px;
     list-style-type: none;
+    justify-content:baseline;
+    
 }

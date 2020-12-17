@@ -20,18 +20,19 @@ const Header = (props) => {
       <div className="nav-wrapper">
         <div>
           <ul className="nav-left">
-            <li>
-              <Link to={"/"}> Home </Link>
+            <li >
+              <Link to={"/"} style={{ textDecoration: 'none' }}> <p className="navbar-link">Home</p>  </Link>
             </li>
             <li >
-              <Link to={"/allproducts"}> All Product </Link>
+              <Link to={"/allproducts"} style={{ textDecoration: 'none' }}> <p className="navbar-link">All products</p> </Link>
             </li>
           </ul>
         </div>
         <div className="nav-mid">
           <h6 className="nav-logo" href="#">
-            Danny's sweet shack
+          Danny's Delicious Deserts
           </h6>
+          {/* <img src={logo} alt="" className="nav-logo"/> */}
         </div>
         <div className="nav-right">
         <ul >
