@@ -2,6 +2,8 @@
     width: 13rem;
     margin-bottom: 10px;
     position:relative;   
+    display: flex; 
+    flex-direction: column;
 }
 
 .all-prod{
@@ -21,9 +23,7 @@
 }
 
 .product-btn{
-    position:absolute;
-    bottom: 0;
-    right: 0;
+    margin-top:auto;
     box-shadow:inset 0px 1px 0px 0px #ffffff;
 	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
 	background-color:#f9f9f9;
@@ -49,13 +49,13 @@
     outline:none;
 }
 
-
+/* 
 @media (max-width: 800px) { 
     .product-img{
-        width: 18rem;
+        width: 100%;
     }
     .product-card{
         width: 18rem;
         margin-top: 25px;
     }
-}
+} */

@@ -10,6 +10,5 @@
 
 .list-header{
     text-align: center;
-    position: relative;
-    top: 55px;
+    margin-top:25px;
 }

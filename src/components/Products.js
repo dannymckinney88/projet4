@@ -5,12 +5,15 @@ import "../styles/products.css";
 const Products = (props) => {
 
   return (
-    <div className="products-container">
+    <div className="container-fluid">
+      <div className="row product-container">
       {props.products
         ? props.products.map((product) => (
             <ProductItem key={product.id} product={product} />
           ))
         : ""}
+        
+      </div>
     </div>
   );
 };
