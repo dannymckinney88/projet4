@@ -23,7 +23,6 @@ const SingleProduct = (props) => {
   };
 
   const fetchProduct = () => {
-    
     commerce.products.retrieve(productId).then((product) => {
       setProduct(product);
     });
@@ -38,27 +37,21 @@ const SingleProduct = (props) => {
         <div className="container-fluid">
           <div className="row product-wrapper">
             <div className="col-4">
-            <h2>hello</h2>
+              <h2>{product.name}</h2>
               <img
                 className="product-info-img"
                 src={product.media.source}
                 alt=""
               />
-           
             </div>
             <div className="col ">
-            <div className=" product-info">
-              <h4>Contents</h4>
-              {product ? ReactHtmlParser(product.description) : ""}
-
-            </div>
+              <div className=" product-info">
+                <h4>Contents</h4>
+                {product ? ReactHtmlParser(product.description) : ""}
+              </div>
             </div>
             <div className="col-2">
-            <button
-             
-                className="single-btn"
-                onClick={handleAddToCart}
-              >
+              <button className="single-btn" onClick={handleAddToCart}>
                 Add to cart
               </button>
             </div>
