@@ -4,6 +4,7 @@ import { PaymentContext } from "../context/Payment";
 import { OrderContext } from "../context/Order";
 import { commerce } from "../lib/commerce";
 import CheckoutForm from "../components/CheckoutForm";
+import Confirmation from "../components/Confirmation";
 
 const Checkout = (props) => {
   const [cart, setCart] = useContext(CartContext);
@@ -11,6 +12,13 @@ const Checkout = (props) => {
   const [order, setOrder] = useContext(OrderContext);
 
   const [checkoutToken, setCheckoutToken] = useState();
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
 
   const cartId = props.match.params.cartId;
 
@@ -62,7 +70,7 @@ const Checkout = (props) => {
         console.log(order);
         refreshCart();
         // Send the user to the receipt
-        props.history.push("/confirmation");
+        props.history.push("/");
         // Store the order in session storage so we can show it again if the
         // user refreshes the page!
         window.sessionStorage.setItem("order_receipt", JSON.stringify(order));
@@ -81,7 +89,14 @@ const Checkout = (props) => {
         handleFormChanges={handleFormChanges}
         handleCaptureCheckout={handleCaptureCheckout}
         cart={cart}
+        show={show}
+        handleShow={handleShow}
       />
+      <Confirmation
+        show={show}
+        handleShow={handleShow}
+        handleClose={handleClose}
+       />
     </div>
   );
 };
