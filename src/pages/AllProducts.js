@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { commerce } from "../lib/commerce";
 import Products from '../components/Products'
+import  '../styles/allProducts.css'
 
 const AllProducts = () => {
 
     const [products, setProducts] = useState()
     const fetchProducts = () => {
         commerce.products
-          .list(  )
+          .list( {limit:200} )
           .then((products) => {
             console.log(products.data);
             setProducts({ products: products.data });
@@ -20,10 +21,17 @@ const AllProducts = () => {
       useEffect(() =>{fetchProducts()}, [])
       console.log(products)
     return (
-        <div>
-            All products
+      <>
+        <div className="hero-img"></div>
+        <div className="container-fluid">
+        <div className="row">
+          <div className="col all-prod">
+            <h4 className="list-header"> All products</h4>
             {products?   <Products products={products.products}/> : "No products this is an error"}
+          </div>
         </div>
+        </div>
+        </>
     );
 }
 

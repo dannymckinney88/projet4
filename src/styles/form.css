@@ -1,0 +1,14 @@
+/* .personal-info{
+    display: flex
+} */
+.cc{
+    display: flex
+}
+.date{
+    display: flex;
+}
+
+.coutnry{
+    display: flex;
+    align-items: center
+}
