@@ -26,7 +26,7 @@ const SingleProduct = (props) => {
             <div className="container-fluid">
             <div className="row product-wrapper">
                 <div className="col">
-                    <img src={product.media.source} alt=""/>
+                    <img className="product-info-img" src={product.media.source} alt=""/>
                 </div>
                 <div className="col product-info">
                     <h4>Contents</h4>

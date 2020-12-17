@@ -5,3 +5,8 @@
 .product-wrapper{
     margin-top:20px;
 }
+
+.product-info-img{
+    height: 450px;
+    width: 100%;
+}
